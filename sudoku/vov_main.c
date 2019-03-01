@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int checker_line (int *arr, int x, int i)
+int checker_line (int *arr, int i)
 {
-	while(arr[x++])
+	int x = -1;
+	while(arr[++x] && x < 9)
 	{
 		if (arr[x] == i)
 				return (0);
@@ -11,14 +12,14 @@ int checker_line (int *arr, int x, int i)
 	return (1);
 }
 
-int checker_column(int **arr, int x, int y, int i)
+int checker_column(int **arr, int x, int i)
 {
 	// printf("I - %d", i);
-	while(x < 9)
+	int y = -1;
+	while(++y < 9)
 	{
-		if(arr[x][y] == i)
+		if(arr[y][x] == i)
 			return (0);
-		x++;
 	}
 	return (1);
 }
@@ -26,7 +27,7 @@ int checker_column(int **arr, int x, int y, int i)
 int validation(int **arr, int x, int y, int ch)
 {
 
-	if (checker_line(arr[x], x, ch) && checker_column(arr, x, y, ch))
+	if (checker_line(arr[x], ch) && checker_column(arr, x, ch))
 		return (1);
 	// printf("checker_line - %d\n", checker_line(arr[x],  x, ch));
 	// printf("checker_column - %d\n", checker_column(arr, x, y, ch));
@@ -61,74 +62,111 @@ int **to_int(char **argv)
 	return (av_origin);
 }
 
-int **solution(int **av_origin, int **av_copy, int x, int y, int i)
+// int **solution(int **av_origin, int **av_copy, int x, int y, int i)
+// {
+// 	printf("start solution: x = %d\ty = %d\ti = %d\n",x,y,i);
+// 	i = 1;
+// 	if (x == 8 && y == 8)
+// 		return (av_copy);
+// 	if (y == 9)
+// 	{
+// 		x++;
+// 		y = 0;
+// 	}
+// 	printf("valid - %d\n", validation(av_copy, x, y, i));
+// 	if (validation(av_copy, x, y, i) == 0)
+// 	{
+// 		printf("1\n" );
+// 		if (y == 0 && x != 0)
+// 			{
+// 				printf("1.1\n" );
+// 				x--;
+// 				y = 8;
+// 			}
+// 		else
+// 		{
+// 			printf("1.2\n" );
+// 			y--;
+// 		}
+// 		if (av_origin[x][y] == av_copy[x][y] && av_origin[x][y] != 0)
+// 		{
+// 			printf("1.3\n");
+// 			printf("x = %d\n", x);
+// 			printf("y = %d\n", y);
+// 			printf("copy = %d\n", av_copy[x][y]);
+// 			printf("i = %d\n", i);
+// 			if (y == 0 && x != 0)
+// 				{
+// 					x--;
+// 					y = 8;
+// 				}
+// 				else
+// 					y--;
+// 		}
+// 		else solution(av_origin, av_copy, x, y, i);
+// 	}
+// 	else
+// 	{
+// 		printf("2\n" );
+// 		while (i <= 9 && validation(av_copy, x, y, i) > 0)
+// 		{
+// 			printf("3\n" );
+// 			if (av_origin[x][y] != 0 && av_origin[x][y] == av_copy[x][y])
+// 				{
+// 					printf("Одинаковое\n" );
+// 					y++;
+// 				}
+//
+// 			else
+// 				{
+// 					printf("Замена\n" );
+// 					av_copy[x][y] = i;
+// 				}
+//
+// 			i++;
+// 			y++;
+// 		}
+// 		solution(av_origin, av_copy, x, y, i);
+// 	}
+// 	return (av_copy);
+// }
+
+void valid_x_y(int *x, int *y)
 {
-	printf("start solution: x = %d\ty = %d\ti = %d\n",x,y,i);
-	i = 1;
-	if (x == 8 && y == 8)
-		return (av_copy);
-	if (y == 9)
+	(*x)++;
+	if (*x > 8)
 	{
-		x++;
-		y = 0;
+		(*y)++;
+		(*x) = 0;
 	}
-	printf("valid - %d\n", validation(av_copy, x, y, i));
-	if (validation(av_copy, x, y, i) == 0)
-	{
-		printf("1\n" );
-		if (y == 0 && x != 0)
-			{
-				printf("1.1\n" );
-				x--;
-				y = 8;
-			}
-		else
-		{
-			printf("1.2\n" );
-			y--;
-		}
-		if (av_origin[x][y] == av_copy[x][y] && av_origin[x][y] != 0)
-		{
-			printf("1.3\n");
-			printf("x = %d\n", x);
-			printf("y = %d\n", y);
-			printf("copy = %d\n", av_copy[x][y]);
-			printf("i = %d\n", i);
-			if (y == 0 && x != 0)
-				{
-					x--;
-					y = 8;
-				}
-				else
-					y--;
-		}
-		else solution(av_origin, av_copy, x, y, i);
-	}
-	else
-	{
-		printf("2\n" );
-		while (i <= 9 && validation(av_copy, x, y, i) > 0)
-		{
-			printf("3\n" );
-			if (av_origin[x][y] != 0 && av_origin[x][y] == av_copy[x][y])
-				{
-					printf("Одинаковое\n" );
-					y++;
-				}
-
-			else
-				{
-					printf("Замена\n" );
-					av_copy[x][y] = i;
-				}
-
-			i++;
-			y++;
-		}
-		solution(av_origin, av_copy, x, y, i);
-	}
-	return (av_copy);
 }
+
+int solution(int ***mtx, int x, int y)
+{
+	int i;
+	if (y == 9)
+		return (1);
+	if ((*mtx)[y][x])
+	{
+		valid_x_y(&x, &y);
+		if (solution(mtx, x, y))
+			return (1);
+	}
+	i = 0;
+	while(++i <= 9)
+	{
+		if (validation(*mtx, x, y, i) && !(*mtx)[y][x])
+		{
+			(*mtx)[y][x] = i;
+			valid_x_y(&x, &y);
+			if (solution(mtx, x, y))
+				return (1);
+			(*mtx)[y][x] = 0;
+		}
+	}
+	return (0);
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -148,7 +186,10 @@ int main(int argc, char *argv[])
 			x++;
 		}
 		printf("____________________________________\n");
-		i = solution(i,i,0,0,1);
+		solution(&i, 0, 0);
+
+			x = 0;
+			y = 0;
 			while (x < 9)
 			{
 				y = 0;
