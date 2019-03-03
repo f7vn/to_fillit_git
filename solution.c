@@ -1,5 +1,5 @@
 #include "./includes/fillit.h"
-
+#include <stdio.h>
 // int valid_x_y(int ***mtx, t_tera tetra, int x, int y)
 // {
 // 	x++;
@@ -13,31 +13,33 @@
 // 	return (0);
 // }
 
-int check_space(char **mtx, t_tetra tetra, int x, int y)
+int check_space(char **mtx, t_tetra **tetra, int x, int y)
 {
 	int xx;
 	int yy;
 	int start_x;
-
+	t_tetra *tet = tetra;
 	start_x = x;
+
 	yy = 0;
-	while ((*tetra).h > yy)
-	{
-		xx = 0;
-		while ((*tetra).w > xx)
-		{
-			if ((*tetra).tetraminka[yy][xx] != '.' && mtx[y][x] != '.')
-				return (0);
-			x++;
-			xx++;
-			if ((*tetra).tetraminka[yy][xx] == '\0')
-				{
-					y++;
-					yy++;
-					x = start_x;
-				}
-		}
-	}
+	printf("%d\n", tet->h);
+	// while ((*tetra).h > yy)
+	// {
+	// 	xx = 0;
+	// 	while ((*tetra).w > xx)
+	// 	{
+	// 		if ((*tetra).tetraminka[yy][xx] != '.' && mtx[y][x] != '.')
+	// 			return (0);
+	// 		x++;
+	// 		xx++;
+	// 		if ((*tetra).tetraminka[yy][xx] == '\0')
+	// 			{
+	// 				y++;
+	// 				yy++;
+	// 				x = start_x;
+	// 			}
+	// 	}
+	// }
 	return (1);
 }
 
