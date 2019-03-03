@@ -2,6 +2,8 @@
 #include "./includes/libft.h"
 #include <stdio.h>
 
+int check_space(char **mtx, t_tetra tetra, int x, int y);
+
 int		ft_fillit(char *line)
 {
 	t_tetra	*lists;
@@ -16,7 +18,7 @@ int		ft_fillit(char *line)
 	ft_putendl("everythingOk");
 	// printf("%d\n", lists->h);
 	// printf("%d\n", lists->w);
-	//
+
 	// while (lists->next)
 	// {
 	// 	i = 0;
@@ -44,14 +46,15 @@ int		ft_fillit(char *line)
 	// 	j++;
 	// }
 
-	sh = ft_n_sharps(&lists);
-	printf("%d\n", sh);
-
-	sh = the_biggest_sqwr(sh);
-	printf("%d\n", sh);
-
+	// sh = ft_n_sharps(&lists);
+	// printf("sharp = %d\n", sh);
+	//
+	// sh = the_biggest_sqwr(sh);
+	// printf("%d\n", sh);
+	//
 	map = ft_create_map(sh);
-
+	i = check_space(map, &lists, 0, 0);
+	printf("valid %d\n", i);
 	i = 0;
 	while (map[i])
 	{
@@ -65,6 +68,7 @@ int		ft_fillit(char *line)
 		i++;
 	}
 	// ft_solve(lists);
+
 	return (0);
 }
 

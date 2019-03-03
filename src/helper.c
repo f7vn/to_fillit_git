@@ -27,7 +27,7 @@ int		the_biggest_sqwr(int sh)
 	i = 2;
 	if (sh < 4)
 		ft_putendl("sh < 4");
-	while (i * i <= sh)
+	while (i * i < sh)
 		i++;
 	return (i);
 }

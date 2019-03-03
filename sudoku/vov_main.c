@@ -15,8 +15,6 @@ int solution(int ***mtx, int x, int y)
 		return (1);
 	if ((*mtx)[y][x])
 	{
-		// valid_x_y(&x, &y);
-		// if (solution(mtx, x, y))
 		if (valid_x_y(mtx, x, y))
 			return (1);
 	}
