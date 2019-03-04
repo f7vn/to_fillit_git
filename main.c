@@ -2,7 +2,10 @@
 #include "./includes/libft.h"
 #include <stdio.h>
 
-int check_space(char **mtx, t_tetra tetra, int x, int y);
+int check_space(char **mtx, t_tetra *tetra, int x, int y);
+int put_tetra(char **mtx, t_tetra *tetra, int x, int y);
+int dell_tetra(char **mtx, t_tetra *tetra, int x, int y);
+int solution(char **mtx, t_tetra *tetra, int x, int y, int sqr);
 
 int		ft_fillit(char *line)
 {
@@ -46,15 +49,20 @@ int		ft_fillit(char *line)
 	// 	j++;
 	// }
 
-	// sh = ft_n_sharps(&lists);
-	// printf("sharp = %d\n", sh);
-	//
-	// sh = the_biggest_sqwr(sh);
-	// printf("%d\n", sh);
-	//
+	sh = ft_n_sharps(lists);
+	printf("sharp = %d\n", sh);
+
+	sh = the_biggest_sqwr(sh);
+	printf("%d\n", sh);
+
 	map = ft_create_map(sh);
-	i = check_space(map, &lists, 0, 0);
+
+	i = check_space(map, lists, 0, 0);
+	i = put_tetra(map, lists, 0, 0);
+	i = dell_tetra(map, lists, 0, 0);
+	ft_putendl("test");
 	printf("valid %d\n", i);
+	printf("Print map\n");
 	i = 0;
 	while (map[i])
 	{
@@ -68,6 +76,22 @@ int		ft_fillit(char *line)
 		i++;
 	}
 	// ft_solve(lists);
+	printf("___________________________________\n");
+	while(!solution(map, lists, 0, 0, sh))
+			map = ft_create_map(++sh);
+	printf("solu%d\n", i);
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			printf("%c", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
 
 	return (0);
 }

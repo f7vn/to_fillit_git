@@ -3,14 +3,14 @@
 #include <stdio.h>
 
 
-int		ft_n_sharps(t_tetra **lists)
+int		ft_n_sharps(t_tetra *lists)
 {
 	int i;
 	t_tetra *arr;
 
 	if (!lists)
 		ft_putendl("No lists");
-	arr = *lists;
+	arr = lists;
 	i = 4;
 	while(arr->next)
 	{

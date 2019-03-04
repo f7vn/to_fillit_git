@@ -13,40 +13,116 @@
 // 	return (0);
 // }
 
-int check_space(char **mtx, t_tetra **tetra, int x, int y)
+int check_space(char **mtx, t_tetra *tetra, int x, int y)
 {
 	int xx;
 	int yy;
 	int start_x;
-	t_tetra *tet = tetra;
 	start_x = x;
 
 	yy = 0;
-	printf("%d\n", tet->h);
-	// while ((*tetra).h > yy)
-	// {
-	// 	xx = 0;
-	// 	while ((*tetra).w > xx)
-	// 	{
-	// 		if ((*tetra).tetraminka[yy][xx] != '.' && mtx[y][x] != '.')
-	// 			return (0);
-	// 		x++;
-	// 		xx++;
-	// 		if ((*tetra).tetraminka[yy][xx] == '\0')
-	// 			{
-	// 				y++;
-	// 				yy++;
-	// 				x = start_x;
-	// 			}
-	// 	}
-	// }
+	// printf("%d\n", tet->h);
+	while (tetra->h > yy)
+	{
+		xx = 0;
+		while (tetra->w > xx)
+		{
+			if ((tetra->tetraminka)[yy][xx] != '.' && mtx[y][x] != '.')
+				return (0);
+			x++;
+			xx++;
+			if ((tetra->tetraminka)[yy][xx] == '\0')
+			{
+				y++;
+				yy++;
+				x = start_x;
+			}
+		}
+	}
 	return (1);
 }
 
-// int solution(char ***mtx, t_tetra tetra, int x, int y)
-// {
-// 	if (valid_exit())
-// 		return (1);
-// 	while(tetra->next)
-//
-// }
+int put_tetra(char **mtx, t_tetra *tetra, int x, int y)
+{
+	int xx;
+	int yy;
+	int start_x;
+	start_x = x;
+
+	yy = 0;
+	// printf("%d\n", tet->h);
+	while (tetra->h > yy)
+	{
+		xx = 0;
+		while (tetra->w > xx)
+		{
+			if (mtx[y][x] == '.')
+				mtx[y][x] = (tetra->tetraminka)[yy][xx];
+			x++;
+			xx++;
+			if ((tetra->tetraminka)[yy][xx] == '\0')
+			{
+				y++;
+				yy++;
+				x = start_x;
+			}
+		}
+	}
+	return (1);
+}
+
+int dell_tetra(char **mtx, t_tetra *tetra, int x, int y)
+{
+	int xx;
+	int yy;
+	int start_x;
+	start_x = x;
+
+	yy = 0;
+	// printf("%d\n", tet->h);
+	while (tetra->h > yy)
+	{
+		xx = 0;
+		while (tetra->w > xx)
+		{
+			if (mtx[y][x] == (tetra->tetraminka)[yy][xx])
+				mtx[y][x] = '.';
+			x++;
+			xx++;
+			if ((tetra->tetraminka)[yy][xx] == '\0')
+			{
+				y++;
+				yy++;
+				x = start_x;
+			}
+		}
+	}
+	return (1);
+}
+
+int solution(char **mtx, t_tetra *tetra, int x, int y, int sqr)
+{
+	if (!tetra)
+		return (1);
+	while (tetra->h + y <= sqr)
+	{
+		while (tetra->w + x <= sqr)
+		{
+			if (check_space(mtx, tetra, x, y))
+			{
+				printf("check_space - %d\n", check_space(mtx, tetra, x, y));
+				put_tetra(mtx, tetra, x, y);
+				x++;
+				printf("x - %d\n", x);
+				if (solution(mtx, tetra->next, x, 0, sqr))
+					return (1);
+			}
+			else
+				x++;
+		}
+		printf("y - %d\n", y);
+		y++;
+		x = 0;
+	}
+	return (0);
+}

@@ -43,7 +43,7 @@ int		get_next_line(const int fd, char **line);
 ** Solve/helper
 */
 
-int		ft_n_sharps(t_tetra **lists);
+int		ft_n_sharps(t_tetra *lists);
 int		the_biggest_sqwr(int sh);
 char 	**ft_create_map(int sqr);
 
