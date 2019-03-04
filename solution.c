@@ -110,17 +110,20 @@ int solution(char **mtx, t_tetra *tetra, int x, int y, int sqr)
 		{
 			if (check_space(mtx, tetra, x, y))
 			{
-				printf("check_space - %d\n", check_space(mtx, tetra, x, y));
+				// printf("check_space - %d\n", check_space(mtx, tetra, x, y));
+				// printf("y = %d, x = %d\n", y, x);
 				put_tetra(mtx, tetra, x, y);
-				x++;
-				printf("x - %d\n", x);
-				if (solution(mtx, tetra->next, x, 0, sqr))
+				// printf("put_tetra\n");
+				// printf("x - %d\n", x);
+				if (solution(mtx, tetra->next, 0, 0, sqr))
 					return (1);
+				dell_tetra(mtx, tetra, x, y);
+				// printf(" dell tetra y = %d, x = %d\n", y, x);
 			}
-			else
-				x++;
+			// printf("second circle x = %d\n", x);
+			x++;
 		}
-		printf("y - %d\n", y);
+		// printf("y - %d\n", y);
 		y++;
 		x = 0;
 	}

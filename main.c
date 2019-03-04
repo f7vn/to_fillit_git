@@ -77,8 +77,10 @@ int		ft_fillit(char *line)
 	}
 	// ft_solve(lists);
 	printf("___________________________________\n");
+	i = 0;
 	while(!solution(map, lists, 0, 0, sh))
-			map = ft_create_map(++sh);
+			{printf("%s\n", "\n\n\nNes wave\n\n\n");
+			map = ft_create_map(++sh);}
 	printf("solu%d\n", i);
 	i = 0;
 	while (map[i])
