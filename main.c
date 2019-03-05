@@ -6,6 +6,7 @@ int check_space(char **mtx, t_tetra *tetra, int x, int y);
 int put_tetra(char **mtx, t_tetra *tetra, int x, int y);
 int dell_tetra(char **mtx, t_tetra *tetra, int x, int y);
 int solution(char **mtx, t_tetra *tetra, int x, int y, int sqr);
+void	ft_clear_mrx(char **mtx);
 
 int		ft_fillit(char *line)
 {
@@ -36,7 +37,7 @@ int		ft_fillit(char *line)
 	// 	}
 	// 	lists = lists->next;
 	// 		printf("\n");
-	// }
+	// }ы
 	//
 	// i = 0;
 	// j = 0;
@@ -56,10 +57,6 @@ int		ft_fillit(char *line)
 	printf("%d\n", sh);
 
 	map = ft_create_map(sh);
-
-	i = check_space(map, lists, 0, 0);
-	i = put_tetra(map, lists, 0, 0);
-	i = dell_tetra(map, lists, 0, 0);
 	ft_putendl("test");
 	printf("valid %d\n", i);
 	printf("Print map\n");
@@ -79,10 +76,11 @@ int		ft_fillit(char *line)
 	printf("___________________________________\n");
 	i = 0;
 	while(!solution(map, lists, 0, 0, sh))
-			{printf("%s\n", "\n\n\nNes wave\n\n\n");
-			map = ft_create_map(++sh);}
-	printf("solu%d\n", i);
-	i = 0;
+	{
+		printf("%s\n", "\n\n\nNes wave\n\n\n");
+		ft_clear_mrx(map);
+		map = ft_create_map(++sh);
+	}
 	while (map[i])
 	{
 		j = 0;
@@ -94,7 +92,6 @@ int		ft_fillit(char *line)
 		printf("\n");
 		i++;
 	}
-
 	return (0);
 }
 
